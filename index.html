@@ -48,7 +48,7 @@
     <div class="d-flex">
         <!-- Side navigation for larger screens -->
         <div class="sticky-top d-none d-lg-flex flex-column vh-100 p-3 bg-light" style="width: 240px;">
-            <h4 class="text-center">Library Dashboard</h4>
+            <h4 class="text-center mb-0">Library Dashboard</h4>
             <hr class="mb-4">
 
             <div class="nav nav-pills flex-column mb-auto">
@@ -71,14 +71,15 @@
         <div class="tab-content flex-grow-1 p-4">
             <!-- Books module -->
             <div class="tab-pane fade show active" id="books">
-                <div class="d-flex justify-content-between mb-3">
-                    <h2>Books</h2>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">
-                        Add Book
+                <h2 class="mb-2">Books</h2>
+
+                <!-- Search and add book button -->
+                <div class="d-flex mb-4">
+                    <input type="text" class="form-control me-3" placeholder="Search books... (title, author, ISBN)">
+                    <button type="button" class="flex-shrink-0 btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">
+                        <span class="d-none d-sm-inline">Add Book</span>
+                        <i class="fa-solid fa-book-medical d-sm-none"></i>
                     </button>
-                </div>
-                <div class="mb-4">
-                    <input type="text" class="form-control" placeholder="Search books... (title, author, ISBN)">
                 </div>
 
                 <!-- Card grid -->
@@ -97,7 +98,76 @@
                                         <p class="card-text text-success  mb-2">Available</p>
                                         <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
                                             <span class="d-none d-sm-inline">Borrow</span>
-                                            <i class="fa-solid fa-book d-sm-none"></i>
+                                            <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                ISBN: 1234567890
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="images/1984.jpg" alt="Book Cover">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="flex-column">
+                                        <h5 class="card-title">1984</h5>
+                                        <p class="card-subtitle text-muted mb-3">George Orwell</p>
+                                    </div>
+                                    <div class="flex-column text-end">
+                                        <p class="card-text text-success  mb-2">Available</p>
+                                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
+                                            <span class="d-none d-sm-inline">Borrow</span>
+                                            <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                ISBN: 1234567890
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="images/1984.jpg" alt="Book Cover">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="flex-column">
+                                        <h5 class="card-title">1984</h5>
+                                        <p class="card-subtitle text-muted mb-3">George Orwell</p>
+                                    </div>
+                                    <div class="flex-column text-end">
+                                        <p class="card-text text-success  mb-2">Available</p>
+                                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
+                                            <span class="d-none d-sm-inline">Borrow</span>
+                                            <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                ISBN: 1234567890
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="images/1984.jpg" alt="Book Cover">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="flex-column">
+                                        <h5 class="card-title">1984</h5>
+                                        <p class="card-subtitle text-muted mb-3">George Orwell</p>
+                                    </div>
+                                    <div class="flex-column text-end">
+                                        <p class="card-text text-success  mb-2">Available</p>
+                                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
+                                            <span class="d-none d-sm-inline">Borrow</span>
+                                            <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -109,7 +179,7 @@
                     </div>
                 </div>
 
-                <!-- Add Book Modal -->
+                <!-- Add Book modal -->
                 <div class="modal fade" id="addBookModal" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -117,34 +187,46 @@
                                 <h5 class="modal-title" id="addBookModalLabel">Add Book</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="mb-1">
-                                        <label for="bookTitle" class="form-label">Title</label>
-                                        <input type="text" class="form-control" id="bookTitle" placeholder="Enter book title" required>
+                            <form>
+                                <div class="modal-body">
+                                    <div class="row mb-1">
+                                        <label for="bookTitle" class="col-sm-2 col-form-label">
+                                            Title<sup class="text-danger">*</sup>
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="bookTitle" placeholder="Enter book title" required>
+                                        </div>
                                     </div>
-                                    <div class="mb-1">
-                                        <label for="bookAuthor" class="form-label">Author</label>
-                                        <input type="text" class="form-control" id="bookAuthor" placeholder="Enter author name" required>
+                                    <div class="row mb-1">
+                                        <label for="bookAuthor" class="col-sm-2 col-form-label">Author</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="bookAuthor" placeholder="Anonymous">
+                                        </div>
                                     </div>
-                                    <div class="mb-1">
-                                        <label for="bookISBN" class="form-label">ISBN</label>
-                                        <input type="text" class="form-control" id="bookISBN" placeholder="Enter ISBN number" required>
+                                    <div class="row mb-1">
+                                        <label for="bookISBN" class="col-sm-2 col-form-label">ISBN</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="bookISBN" placeholder="Optional">
+                                        </div>
                                     </div>
-                                    <div class="mb-1">
-                                        <label for="bookGenre" class="form-label">Genre</label>
-                                        <input type="text" class="form-control" id="bookGenre" placeholder="Enter genre">
+                                    <div class="row mb-1">
+                                        <label for="bookGenre" class="col-sm-2 col-form-label">Genre</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="bookGenre" placeholder="Fiction, Nonfiction, etc.">
+                                        </div>
                                     </div>
-                                    <div class="mb-1">
-                                        <label for="bookCover" class="form-label">Book Cover</label>
-                                        <input type="file" class="form-control" id="bookCover" accept="image/*">
+                                    <div class="row mb-1">
+                                        <label for="bookCover" class="col-sm-2 col-form-label">Cover</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" class="form-control" id="bookCover" accept="image/*">
+                                        </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save</button>
-                            </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -157,26 +239,32 @@
                                 <h5 class="modal-title" id="borrowBookModalLabel">Borrow Book</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="borrowerName" class="form-label">Borrower Name</label>
-                                        <input type="text" class="form-control" id="borrowerName" placeholder="Enter borrower name" required>
+                            <form>
+                                <div class="modal-body">
+                                    <div class="row mb-1">
+                                        <label for="borrowerName" class="col-sm-4 col-form-label">Borrower Name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="borrowerName" placeholder="Enter borrower name" required>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="borrowDate" class="form-label">Borrow Date</label>
-                                        <input type="date" class="form-control" id="borrowDate" required>
+                                    <div class="row mb-1">
+                                        <label for="borrowDate" class="col-sm-4 col-form-label">Borrow Date</label>
+                                        <div class="col-sm-8">
+                                            <input type="date" class="form-control" id="borrowDate" required>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="returnDate" class="form-label">Return Date</label>
-                                        <input type="date" class="form-control" id="returnDate" required>
+                                    <div class="row mb-1">
+                                        <label for="returnDate" class="col-sm-4 col-form-label">Return Date</label>
+                                        <div class="col-sm-8">
+                                            <input type="date" class="form-control" id="returnDate" required>
+                                        </div>  
                                     </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
-                            </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
