@@ -46,7 +46,7 @@
 
     <div class="d-flex">
         <!-- Side navigation for larger screens -->
-        <div class="bg-light vh-100 p-3 sticky-top d-none d-lg-flex flex-column" style="width: 240px;">
+        <div class="sticky-top d-none d-lg-flex flex-column bg-light vh-100 p-3" style="min-width: 240px;">
             <h4 class="text-center mb-0">Library Dashboard</h4>
             <hr class="mb-4">
 
@@ -82,19 +82,19 @@
                 </div>
 
                 <!-- Card grid -->
-                <div class="row g-4 row-cols-2 row-cols-lg-3">
+                <div class="row row-cols-2 row-cols-lg-3 g-4 ">
                     <!-- Base book card -->
                     <div class="col">
                         <div class="card h-100">
                             <img class="card-img-top" src="images/1984.jpg" alt="Book Cover">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between flex-column flex-sm-row">
-                                    <div class="flex-column">
+                                <div class="d-flex flex-column flex-sm-row justify-content-between">
+                                    <div class="d-flex flex-column mb-2">
                                         <h5 class="card-title">1984</h5>
-                                        <p class="card-subtitle text-muted mb-3">George Orwell</p>
+                                        <p class="card-subtitle text-muted">George Orwell</p>
                                     </div>
-                                    <div class="flex-column text-start text-sm-end mt-2 mt-sm-0">
-                                        <p class="card-text text-success mb-2">Available</p>
+                                    <div class="d-flex flex-sm-column justify-content-between">
+                                        <p class="card-text text-success text-end mb-2">Available</p>
                                         <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
                                             <span class="d-none d-sm-inline">Borrow</span>
                                             <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
@@ -112,13 +112,13 @@
                         <div class="card h-100">
                             <img class="card-img-top" src="images/empty.jpg" alt="Book Cover">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between flex-column flex-sm-row">
-                                    <div class="flex-column">
+                                <div class="d-flex flex-column flex-sm-row justify-content-between">
+                                    <div class="d-flex flex-column mb-2">
                                         <h5 class="card-title">Untitled</h5>
-                                        <p class="card-subtitle text-muted mb-3">Anonymous</p>
+                                        <p class="card-subtitle text-muted">Anonymous</p>
                                     </div>
-                                    <div class="flex-column text-start text-sm-end mt-2 mt-sm-0">
-                                        <p class="card-text text-muted mb-2">Unavailable</p>
+                                    <div class="d-flex flex-sm-column justify-content-between">
+                                        <p class="card-text text-secondary text-end mb-2">Unavailable</p>
                                         <a class="btn btn-secondary disabled" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
                                             <span class="d-none d-sm-inline">Borrow</span>
                                             <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
@@ -136,13 +136,13 @@
                         <div class="card h-100">
                             <img class="card-img-top" src="images/knuth.png" alt="Book Cover">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between flex-column flex-sm-row">
-                                    <div class="flex-column">
+                                <div class="d-flex flex-column flex-sm-row justify-content-between">
+                                    <div class="d-flex flex-column mb-2">
                                         <h5 class="card-title">The Art of Computer Programming</h5>
-                                        <p class="card-subtitle text-muted mb-3">Donald Knuth</p>
+                                        <p class="card-subtitle text-muted">Donald Knuth</p>
                                     </div>
-                                    <div class="flex-column text-start text-sm-end mt-2 mt-sm-0">
-                                        <p class="card-text text-warning mb-2">Borrowed</p>
+                                    <div class="d-flex flex-sm-column justify-content-between">
+                                        <p class="card-text text-warning text-end mb-2">Borrowed</p>
                                         <a class="btn btn-warning disabled" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
                                             <span class="d-none d-sm-inline">Borrow</span>
                                             <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
@@ -155,17 +155,18 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col">
                         <div class="card h-100">
                             <img class="card-img-top" src="images/gulliver.jpg" alt="Book Cover">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between flex-column flex-sm-row">
-                                    <div class="flex-column">
+                                <div class="d-flex flex-column flex-sm-row justify-content-between">
+                                    <div class="d-flex flex-column mb-2">
                                         <h5 class="card-title">Gulliver's Travels</h5>
-                                        <p class="card-subtitle text-muted mb-3">Jonathan Swift</p>
+                                        <p class="card-subtitle text-muted">Jonathan Swift</p>
                                     </div>
-                                    <div class="flex-column text-start text-sm-end mt-2 mt-sm-0">
-                                        <p class="card-text text-success mb-2">Available</p>
+                                    <div class="d-flex flex-sm-column justify-content-between">
+                                        <p class="card-text text-success text-end mb-2">Available</p>
                                         <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
                                             <span class="d-none d-sm-inline">Borrow</span>
                                             <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
