@@ -12,9 +12,9 @@
     
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="bg-light">
     <!-- Top navigation for smaller screens -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light d-lg-none d-flex">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white d-lg-none d-flex">
         <div class="container-fluid">
             <h4 class="my-auto">Library Dashboard</h4>
 
@@ -28,21 +28,23 @@
                 <ul class="nav nav-pills flex-column mt-3">
                     <!-- Navigation links for smaller screens -->
                     <li class="nav-item">
-                        <a class="nav-link active" href="#books" data-bs-toggle="pill">
-                            <i class="fa-solid fa-book fa-fw"></i>
-                            Books
+                        <a class="nav-link active" href="#dashboard" data-bs-toggle="pill">
+                            <i class="fa-solid fa-dashboard fa-fw"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#borrowers" data-bs-toggle="pill">
-                            <i class="fa-solid fa-users fa-fw"></i>
-                            Borrowers
+                        <a class="nav-link" href="#booksModule" data-bs-toggle="pill">
+                            <i class="fa-solid fa-book fa-fw"></i> Books
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#transactions" data-bs-toggle="pill">
-                            <i class="fa-solid fa-history fa-fw"></i>
-                            Transactions
+                        <a class="nav-link" href="#borrowersModule" data-bs-toggle="pill">
+                            <i class="fa-solid fa-users fa-fw"></i> Borrowers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#transactionsModule" data-bs-toggle="pill">
+                            <i class="fa-solid fa-history fa-fw"></i> Transactions
                         </a>
                     </li>
                 </ul>
@@ -52,253 +54,432 @@
 
     <div class="d-flex">
         <!-- Side navigation for larger screens -->
-        <div class="sticky-top d-none d-lg-flex flex-column bg-light vh-100 p-3" style="min-width: 240px;">
+        <div class="sticky-top d-none d-lg-flex flex-column vh-100 p-3 bg-white shadow-sm" style="min-width: 240px;">
             <h4 class="text-center mb-0">Library Dashboard</h4>
             <hr class="mb-4">
 
             <!-- Navigation links for larger screens -->
             <div class="nav nav-pills flex-column mb-auto">
-                <a href="#books" class="nav-link active" data-bs-toggle="pill">
-                    <i class="fa-solid fa-book fa-fw"></i>
-                    Books
+                <a href="#dashboard" class="nav-link active" data-bs-toggle="pill">
+                    <i class="fa-solid fa-dashboard fa-fw"></i> Dashboard
                 </a>
-                <a href="#borrowers" class="nav-link" data-bs-toggle="pill">
-                    <i class="fa-solid fa-users fa-fw"></i>
-                    Borrowers
+                <a href="#booksModule" class="nav-link" data-bs-toggle="pill">
+                    <i class="fa-solid fa-book fa-fw"></i> Books
                 </a>
-                <a href="#transactions" class="nav-link" data-bs-toggle="pill">
-                    <i class="fa-solid fa-history fa-fw"></i>
-                    Transactions
+                <a href="#borrowersModule" class="nav-link" data-bs-toggle="pill">
+                    <i class="fa-solid fa-users fa-fw"></i> Borrowers
+                </a>
+                <a href="#transactionsModule" class="nav-link" data-bs-toggle="pill">
+                    <i class="fa-solid fa-history fa-fw"></i> Transactions
                 </a>
             </div>
         </div>
 
         <!-- Main content area -->
-        <div class="tab-content flex-grow-1 p-4">
+        <div class="tab-content flex-grow-1 p-4 vw-100">
+            <!-- Dashboard summary -->
+            <div class="tab-pane fade active show" id="dashboard">
+                <section class="p-4 bg-white rounded shadow-sm mb-4">
+                    <h2 class="mb-4">Summary</h2>
+                    <div class="row g-4">
+                        <div class="col-12 col-md-4">
+                            <div class="card text-center border-primary shadow-sm h-100">
+                                <div class="card-body">
+                                    <i class="fa-solid fa-book fa-2x mb-3 text-primary"></i>
+                                    <h3 class="card-title" id="dashboardTotalBooks">0</h3>
+                                    <p class="card-text text-muted">Total Books</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="card text-center border-success shadow-sm h-100">
+                                <div class="card-body">
+                                    <i class="fa-solid fa-users fa-2x mb-3 text-success"></i>
+                                    <h3 class="card-title" id="dashboardTotalBorrowers">0</h3>
+                                    <p class="card-text text-muted">Total Borrowers</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="card text-center border-warning shadow-sm h-100">
+                                <div class="card-body">
+                                    <i class="fa-solid fa-clock fa-2x mb-3 text-warning"></i>
+                                    <h3 class="card-title" id="dashboardActiveTransactions">0</h3>
+                                    <p class="card-text text-muted">Active Transactions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="p-4 bg-white rounded shadow-sm">
+                    <h2 class="mb-4">Recent Activity</h2>
+                    <div class="list-group" id="dashboardRecentActivity">
+                        <!-- Activity items will be dynamically inserted here -->
+                    </div>
+                </section>
+            </div>
+            
             <!-- Books module -->
-            <div class="tab-pane fade show active" id="books">
-                <!-- Header with title and "Add Book" button -->
-                <div class="d-flex justify-content-between align-items-end mb-3">
-                    <h2 class="my-0 text-bottom">Books</h2>
-                    <button type="button" class="btn btn-primary flex-shrink-0" data-bs-toggle="modal" data-bs-target="#addBookModal">
-                        Add Book
-                    </button>
-                </div>
+            <div class="tab-pane fade" id="booksModule">
+                <section class="p-4 bg-white rounded shadow-sm" id="booksSection">
+                    <!-- Header with title and "Add Book" button -->
+                    <div class="d-flex justify-content-between align-items-end mb-3">
+                        <h2 class="my-0 text-bottom">Books</h2>
+                        <button type="button" class="btn btn-primary flex-shrink-0" data-bs-toggle="modal" data-bs-target="#booksModalAdd">
+                            <span class="d-none d-sm-inline">Add Book</span>
+                            <i class="fa-solid fa-book-medical d-sm-none"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Search bar and search button -->
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control" placeholder="Search books... (title, author, ISBN)" id="booksSearchInput">
+                        <button type="button" class="btn btn-primary flex-shrink-0" id="booksSearchBtn">
+                            <span class="d-none d-sm-inline">Search</span>
+                            <i class="fa-solid fa-search d-sm-none"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card grid for displaying books -->
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="booksGrid">
+                        <!-- Book cards will be dynamically inserted here -->
+                    </div>
+                    
+                    <!-- Add Book modal -->
+                    <div class="modal fade" id="booksModalAdd" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add Book</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form id="booksFormAdd">
+                                    <div class="modal-body">
+                                        <!-- Form fields for adding a book -->
+                                        <div class="row mb-1">
+                                            <label for="booksFormAddTitle" class="col-sm-2 col-form-label">
+                                                Title<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="booksFormAddTitle" required>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="booksFormAddAuthor" class="col-sm-2 col-form-label">Author</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="booksFormAddAuthor" placeholder="Anonymous">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="booksFormAddISBN" class="col-sm-2 col-form-label">ISBN</label>
+                                            <div class="col-sm-10">
+                                                <input type="number" class="form-control" id="booksFormAddISBN">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="booksFormAddGenre" class="col-sm-2 col-form-label">Genre</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="booksFormAddGenre">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="booksFormAddCover" class="col-sm-2 col-form-label">Cover</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" id="booksFormAddCover" accept="image/*">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Borrow Book Modal -->
+                    <div class="modal fade" id="booksModalBorrow" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Borrow Book</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form id="booksFormBorrow">
+                                    <input type="hidden" id="booksFormBorrowId">
+                                    <div class="modal-body">
+                                        <div class="row mb-1">
+                                            <label for="booksFormBorrowUser" class="col-sm-4 col-form-label">
+                                                Borrower<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" id="booksFormBorrowUser" required>
+                                                    <!-- Borrowers will be dynamically inserted here -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="booksFormBorrowBorrowDate" class="col-sm-4 col-form-label">Borrow Date</label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="booksFormBorrowBorrowDate" required>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="booksFormBorrowReturnDate" class="col-sm-4 col-form-label">Deadline</label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="booksFormBorrowReturnDate" required>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 
-                <!-- Search bar and search button -->
-                <div class="input-group mb-4">
-                    <input type="text" class="form-control" placeholder="Search books... (title, author, ISBN)">
-                    <a href="" type="button" class="btn btn-primary flex-shrink-0">
-                        <span class="d-none d-sm-inline">Search</span>
-                        <i class="fa-solid fa-search d-sm-none"></i>
-                    </a>
-                </div>
-
-                <!-- Card grid for displaying books -->
-                <div class="row row-cols-2 row-cols-lg-3 g-4">
-                    <!-- Example book card: 1984 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="images/1984.jpg" alt="Book Cover">
-                            <div class="card-body">
-                                <div class="d-flex flex-column flex-sm-row justify-content-between h-100">
-                                    <div class="d-flex flex-column mb-2 me-2">
-                                        <h5 class="card-title">1984</h5>
-                                        <p class="card-subtitle text-muted">George Orwell</p>
-                                    </div>
-                                    <div class="d-flex flex-sm-column justify-content-between justify-content-sm-start">
-                                        <p class="card-text text-success text-sm-end mb-2">Available</p>
-                                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
-                                            <span class="d-none d-sm-inline">Borrow</span>
-                                            <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer text-muted">
-                                ISBN: 0-4969-5159-9
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="images/empty.jpg" alt="Book Cover">
-                            <div class="card-body">
-                                <div class="d-flex flex-column flex-sm-row justify-content-between h-100">
-                                    <div class="d-flex flex-column mb-2 me-2">
-                                        <h5 class="card-title">Untitled</h5>
-                                        <p class="card-subtitle text-muted">Anonymous</p>
-                                    </div>
-                                    <div class="d-flex flex-sm-column justify-content-between justify-content-sm-start">
-                                        <p class="card-text text-secondary text-end mb-2">Unavailable</p>
-                                        <a class="btn btn-secondary disabled" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
-                                            <span class="d-none d-sm-inline">Borrow</span>
-                                            <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer text-muted">
-                                ISBN: -
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="images/knuth.png" alt="Book Cover">
-                            <div class="card-body">
-                                <div class="d-flex flex-column flex-sm-row justify-content-between h-100">
-                                    <div class="d-flex flex-column mb-2 me-2">
-                                        <h5 class="card-title">The Art of Computer Programming</h5>
-                                        <p class="card-subtitle text-muted">Donald Knuth</p>
-                                    </div>
-                                    <div class="d-flex flex-sm-column justify-content-between justify-content-sm-start">
-                                        <p class="card-text text-warning text-end mb-2">Borrowed</p>
-                                        <a class="btn btn-warning disabled" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
-                                            <span class="d-none d-sm-inline">Borrow</span>
-                                            <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer text-muted">
-                                ISBN: 0-2715-1829-4
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="images/gulliver.jpg" alt="Book Cover">
-                            <div class="card-body">
-                                <div class="d-flex flex-column flex-sm-row justify-content-between h-100">
-                                    <div class="d-flex flex-column mb-2 me-2">
-                                        <h5 class="card-title">Gulliver's Travels</h5>
-                                        <p class="card-subtitle text-muted">Jonathan Swift</p>
-                                    </div>
-                                    <div class="d-flex flex-sm-column justify-content-between justify-content-sm-start">
-                                        <p class="card-text text-success text-end mb-2">Available</p>
-                                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#borrowBookModal">
-                                            <span class="d-none d-sm-inline">Borrow</span>
-                                            <i class="fa-solid fa-right-from-bracket d-sm-none"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer text-muted">
-                                ISBN: 0-6513-9886-X
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Add Book modal -->
-                <div class="modal fade" id="addBookModal" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addBookModalLabel">Add Book</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form>
-                                <div class="modal-body">
-                                    <!-- Form fields for adding a book -->
-                                    <div class="row mb-1">
-                                        <label for="bookTitle" class="col-sm-2 col-form-label">
-                                            Title<sup class="text-danger">*</sup>
-                                        </label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="bookTitle" placeholder="Enter book title" required>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-1">
-                                        <label for="bookAuthor" class="col-sm-2 col-form-label">Author</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="bookAuthor" placeholder="Anonymous">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-1">
-                                        <label for="bookISBN" class="col-sm-2 col-form-label">ISBN</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control" id="bookISBN" placeholder="Optional">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-1">
-                                        <label for="bookGenre" class="col-sm-2 col-form-label">Genre</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="bookGenre" placeholder="Fiction, Nonfiction, etc.">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-1">
-                                        <label for="bookCover" class="col-sm-2 col-form-label">Cover</label>
-                                        <div class="col-sm-10">
-                                            <input type="file" class="form-control" id="bookCover" accept="image/*">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Borrow Book Modal -->
-                <div class="modal fade" id="borrowBookModal" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="borrowBookModalLabel">Borrow Book</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form>
-                                <div class="modal-body">
-                                    <div class="row mb-1">
-                                        <label for="borrowerName" class="col-sm-4 col-form-label">Borrower Name</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="borrowerName" placeholder="Enter borrower name" required>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-1">
-                                        <label for="borrowDate" class="col-sm-4 col-form-label">Borrow Date</label>
-                                        <div class="col-sm-8">
-                                            <input type="date" class="form-control" id="borrowDate" required>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-1">
-                                        <label for="returnDate" class="col-sm-4 col-form-label">Return Date</label>
-                                        <div class="col-sm-8">
-                                            <input type="date" class="form-control" id="returnDate" required>
-                                        </div>  
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Confirm</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Borrowers module -->
-            <div id="borrowers" class="tab-pane fade">
-                <!-- Placeholder for Borrowers module -->
+            <div class="tab-pane fade" id="borrowersModule">
+                <section class="p-4 bg-white rounded shadow-sm" id="borrowersSection">
+                    <!-- Header with title and "Add User" button -->
+                    <div class="d-flex justify-content-between align-items-end mb-3">
+                        <h2 class="my-0 text-bottom">Borrowers</h2>
+                        <button type="button" class="btn btn-primary flex-shrink-0" data-bs-toggle="modal" data-bs-target="#borrowersModalAdd">
+                            <span class="d-none d-sm-inline">Add User</span>
+                            <i class="fa-solid fa-user-plus d-sm-none"></i>
+                        </button>
+                    </div>
+
+                    <!-- Search bar and search button -->
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control" placeholder="Search borrowers... (name, email, type)" id="borrowersSearchInput">
+                        <button type="button" class="btn btn-primary flex-shrink-0" id="borrowersSearchBtn">
+                            <span class="d-none d-sm-inline">Search</span>
+                            <i class="fa-solid fa-search d-sm-none"></i>
+                        </button>
+                    </div>
+
+                    <!-- Table for displaying borrowers -->
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Email</th>
+                                    <th>Currently Borrowed</th>
+                                </tr>
+                            </thead>
+                            <tbody id="borrowersTableBody">
+                                <!-- Borrowers will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Add User modal -->
+                    <div class="modal fade" id="borrowersModalAdd" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add User</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form id="borrowersFormAdd">
+                                    <div class="modal-body">
+                                        <div class="row mb-1">
+                                            <label for="borrowersFormAddName" class="col-sm-3 col-form-label">
+                                                Name<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="borrowersFormAddName" required>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="borrowersFormAddType" class="col-sm-3 col-form-label">
+                                                Type
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="borrowersFormAddType" required>
+                                                    <option value="student">Student</option>
+                                                    <option value="teacher">Teacher</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="borrowersFormAddEmail" class="col-sm-3 col-form-label">
+                                                Email<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="email" class="form-control" id="borrowersFormAddEmail" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
             
             <!-- Transactions module -->
-            <div id="transactions" class="tab-pane fade">
-                <!-- Placeholder for Transactions module -->
+            <div class="tab-pane fade" id="transactionsModule">
+                <section class="p-4 bg-white rounded shadow-sm" id="transactionsSection">
+                    <!-- Header with title and "Add Transaction" button -->
+                    <div class="d-flex justify-content-between align-items-end mb-3">
+                        <h2 class="my-0 text-bottom">Transactions</h2>
+                        <button type="button" class="btn btn-primary flex-shrink-0" data-bs-toggle="modal" data-bs-target="#transactionsModalAdd">
+                            <span class="d-none d-sm-inline">Add Transaction</span>
+                            <i class="fa-solid fa-plus d-sm-none"></i>
+                        </button>
+                    </div>
+
+                    <!-- Search bar and search button -->
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control" placeholder="Search transactions... (name, book, date)" id="transactionsSearchInput">
+                        <button type="button" class="btn btn-primary flex-shrink-0" id="transactionsSearchBtn">
+                            <span class="d-none d-sm-inline">Search</span>
+                            <i class="fa-solid fa-search d-sm-none"></i>
+                        </button>
+                    </div>
+
+                    <!-- Tables for displaying transactions -->
+                    <h4 class="mb-3">Pending Transactions</h4>
+                    <div class="table-responsive mb-5">
+                        <table class="table table-striped align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Borrower</th>
+                                    <th>Type</th>
+                                    <th>Book Title</th>
+                                    <th>Borrow Date</th>
+                                    <th>Deadline</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingTransactionsTableBody">
+                                <!-- Pending transactions will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="mb-3">Completed Transactions</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Borrower</th>
+                                    <th>Type</th>
+                                    <th>Book Title</th>
+                                    <th>Borrow Date</th>
+                                    <th>Deadline</th>
+                                    <th>Return Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="completedTransactionsTableBody">
+                                <!-- Completed transactions will be dynamically inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Add Transaction modal -->
+                    <div class="modal fade" id="transactionsModalAdd" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add Transaction</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form id="transactionsFormAdd">
+                                    <div class="modal-body">
+                                        <div class="row mb-1">
+                                            <label for="transactionsFormAddUser" class="col-sm-4 col-form-label">
+                                                Borrower<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" id="transactionsFormAddUser" required>
+                                                    <!-- Borrowers will be dynamically inserted here -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="transactionsFormAddBook" class="col-sm-4 col-form-label">
+                                                Book Title
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" id="transactionsFormAddBook" required>
+                                                    <!-- Books will be dynamically inserted here -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="transactionsFormAddBorrowDate" class="col-sm-4 col-form-label">
+                                                Borrow Date
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="transactionsFormAddBorrowDate" required>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="transactionsFormAddReturnDate" class="col-sm-4 col-form-label">
+                                                Deadline
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="transactionsFormAddReturnDate" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Return Book modal -->
+                    <div class="modal fade" id="transactionsModalReturn" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Return Book</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form id="transactionsFormReturn">
+                                    <input type="hidden" id="transactionsFormReturnId">
+                                    <div class="modal-body">
+                                        <p>Confirm return of <strong id="transactionsFormReturnTitle">N/A</strong> borrowed by <strong id="transactionsFormReturnBorrowerName">N/A</strong>?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+     <script src="js/script.js"></script>
 </body>
 </html>
